@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ramo Amarillo Animado</title>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+  <style>
+    /* RESET & CONTENEDOR */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      background: #f3f3f3;
+      position: relative;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    /* RAMO */
+    .bouquet {
+      position: relative;
+      width: 80vw;
+      max-width: 300px;
+      height: 80vw;
+      max-height: 300px;
+      animation: sway 5s infinite ease-in-out;
+    }
+    .flower {
+      position: absolute;
+      bottom: 0;
+      opacity: 0;
+      animation: bloom 1s ease-out forwards, glow 2s infinite alternate ease-in-out;
+    }
+    .sunflower { left: 10%; animation-delay: 0.4s; }
+    .rose      { left: 40%; animation-delay: 0.8s; }
+    .tulip     { left: 70%; animation-delay: 1.2s; }
+
+    /* TALLOS */
+    .stem {
+      position: absolute;
+      bottom: 0;
+      left: calc(50% - 2px);
+      width: 4px;
+      height: 80px;
+      background: #228B22;
+      border-radius: 2px;
+    }
+
+    /* HOJAS */
+    .leaf {
+      position: absolute;
+      bottom: 40px;
+      width: 30px;
+      height: 15px;
+      background: #228B22;
+      border-radius: 15px 15px 0 0;
+    }
+    .leaf-left  { left: 20%; transform: rotate(30deg); }
+    .leaf-right { left: 60%; transform: rotate(-30deg); }
+
+    /* ANIMACIONES RAMO */
+    @keyframes bloom {
+      0%   { transform: scale(0) translateY(50px); opacity: 0; }
+      80%  { transform: scale(1.1) translateY(0); opacity: 1; }
+      100% { transform: scale(1) translateY(0); }
+    }
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 4px rgba(255,215,0,0.4)); }
+      to   { filter: drop-shadow(0 0 12px rgba(255,215,0,0.8)); }
+    }
+    @keyframes sway {
+      0%,100% { transform: translateX(0); }
+      50%     { transform: translateX(5px); }
+    }
+
+    /* GIRASOL */
+    .sunflower .petal {
+      width: 20px; height: 40px;
+      background: #FFD700;
+      position: absolute;
+      top: 20px; left: 40px;
+      transform-origin: 50% 100%;
+    }
+    .sunflower .petal:nth-child(3)  { transform: rotate(0deg);   }
+    .sunflower .petal:nth-child(4)  { transform: rotate(45deg);  }
+    .sunflower .petal:nth-child(5)  { transform: rotate(90deg);  }
+    .sunflower .petal:nth-child(6)  { transform: rotate(135deg); }
+    .sunflower .petal:nth-child(7)  { transform: rotate(180deg); }
+    .sunflower .petal:nth-child(8)  { transform: rotate(225deg); }
+    .sunflower .petal:nth-child(9)  { transform: rotate(270deg); }
+    .sunflower .petal:nth-child(10) { transform: rotate(315deg); }
+    .sunflower .center {
+      width: 40px; height: 40px;
+      background: #B8860B;
+      border-radius: 50%;
+      position: absolute;
+      top: 30px; left: 30px;
+    }
+
+    /* ROSA */
+    .rose {
+      width: 60px; height: 60px;
+      background: radial-gradient(circle at 30% 30%, #FFB90F, #FFD700);
+      border-radius: 50% 50% 30% 30%;
+      bottom: 20px;
+    }
+
+    /* TULIPÁN */
+    .tulip {
+      width: 40px; height: 60px;
+      background: #FFD700;
+      clip-path: polygon(50% 0%, 100% 60%, 75% 100%, 25% 100%, 0% 60%);
+      bottom: 10px;
+    }
+
+    /* PÉTALOS QUE CAEN */
+    .petals {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+    .petal-fall {
+      position: absolute;
+      width: 10px; height: 20px;
+      background: #FFD700;
+      border-radius: 50% 50% 0 0;
+      opacity: 0.8;
+      animation: fall linear infinite;
+    }
+    .petal-fall:nth-child(1)  { left: 10%;  animation-duration: 4s; animation-delay: 0s; }
+    .petal-fall:nth-child(2)  { left: 25%;  animation-duration: 3.5s; animation-delay: 1s; }
+    .petal-fall:nth-child(3)  { left: 40%;  animation-duration: 4.5s; animation-delay: 0.5s; }
+    .petal-fall:nth-child(4)  { left: 55%;  animation-duration: 3s; animation-delay: 1.2s; }
+    .petal-fall:nth-child(5)  { left: 70%;  animation-duration: 4.2s; animation-delay: 0.7s; }
+    .petal-fall:nth-child(6)  { left: 85%;  animation-duration: 3.8s; animation-delay: 1.5s; }
+    .petal-fall:nth-child(7)  { left: 50%;  animation-duration: 3.6s; animation-delay: 0.3s; }
+    .petal-fall:nth-child(8)  { left: 30%;  animation-duration: 4.1s; animation-delay: 1s; }
+    @keyframes fall {
+      0%   { transform: translateY(-20px) rotate(0deg); opacity: 0.8; }
+      100% { transform: translateY(320px) rotate(360deg); opacity: 0; }
+    }
+
+    /* MENSAJE FINAL */
+    .message {
+      font-family: 'Allura', cursive;
+      color: #F88379;
+      font-size: 6vw;
+      max-font-size: 1.8rem;
+      text-align: center;
+      width: 100%;
+      position: absolute;
+      bottom: 5vh;
+      left: 0;
+      opacity: 0;
+      animation: textFadeIn 1.5s ease-out 2.5s forwards;
+    }
+    @keyframes textFadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bouquet">
+    <!-- Girasol -->
+    <div class="flower sunflower">
+      <div class="stem"></div>
+      <div class="leaf leaf-left"></div>
+      <div class="leaf leaf-right"></div>
+      <div class="petal"></div><div class="petal"></div>
+      <div class="petal"></div><div class="petal"></div>
+      <div class="petal"></div><div class="petal"></div>
+      <div class="petal"></div><div class="petal"></div>
+      <div class="center"></div>
+    </div>
+
+    <!-- Rosa amarilla -->
+    <div class="flower rose">
+      <div class="stem"></div>
+      <div class="leaf leaf-left"></div>
+      <div class="leaf leaf-right"></div>
+    </div>
+
+    <!-- Tulipán -->
+    <div class="flower tulip">
+      <div class="stem"></div>
+      <div class="leaf leaf-left"></div>
+      <div class="leaf leaf-right"></div>
+    </div>
+
+    <!-- Pétalos cayendo -->
+    <div class="petals">
+      <div class="petal-fall"></div><div class="petal-fall"></div>
+      <div class="petal-fall"></div><div class="petal-fall"></div>
+      <div class="petal-fall"></div><div class="petal-fall"></div>
+      <div class="petal-fall"></div><div class="petal-fall"></div>
+    </div>
+  </div>
+
+  <!-- Mensaje final -->
+  <div class="message">
+    Mi niña hermosa, que la distancia no te haga dudar de lo mucho que te amo.
+  </div>
+
+</body>
+</html>
