@@ -1,4 +1,3 @@
-/* Fondo */
 body,html {
   margin:0;
   padding:0;
@@ -27,35 +26,48 @@ body,html {
 }
 
 .flowers {
-  width:300px;
-  height:400px;
+  width:320px;
+  height:450px;
 }
 
 .flower {
-  transform-origin: center bottom;
+  transform-origin:center bottom;
 }
 
-/* Movimiento suave (respirar con el viento) */
 @keyframes sway {
-  0%   { transform: translateY(0) scale(1) rotate(-1deg); }
-  50%  { transform: translateY(-2px) scale(1.02) rotate(2deg); }
-  100% { transform: translateY(0) scale(1) rotate(-1deg); }
+  0%   { transform:translateY(0) scale(1) rotate(-1deg);}
+  50%  { transform:translateY(-2px) scale(1.02) rotate(2deg);}
+  100% { transform:translateY(0) scale(1) rotate(-1deg);}
 }
-
 .flower.sway {
-  animation: sway 4s ease-in-out infinite;
+  animation:sway 4s ease-in-out infinite;
 }
 
 /* Texto */
 .love-text {
-  font-family: 'Allura', cursive;
-  font-size: 2.2rem;
-  color: #F88379;
+  font-family:'Allura', cursive;
+  font-size:2.2rem;
+  color:#F88379;
   text-align:center;
-  max-width: 90%;
+  max-width:90%;
   margin-top:20px;
   opacity:0;
   transform:translateY(20px);
-  transition: all 2s ease;
+  transition:all 2s ease;
 }
 
+/* Botón música */
+#playMusic {
+  margin-top:15px;
+  padding:10px 20px;
+  font-size:1rem;
+  background:#F88379;
+  color:#fff;
+  border:none;
+  border-radius:25px;
+  cursor:pointer;
+  font-family:sans-serif;
+}
+#playMusic:hover {
+  background:#f0625d;
+}
