@@ -5,21 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ramo para mi niña hermosa</title>
 
-  <!-- tu CSS -->
+  <!-- Tu CSS combinado -->
   <link rel="stylesheet" href="styles.css">
 
-  <!-- Google Font Allura -->
+  <!-- Fuente Allura -->
   <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- lienzo para estrellas -->
+  <!-- 1) Lienzo para las estrellas -->
   <canvas id="stars"></canvas>
 
-  <!-- efecto de noche difuso -->
+  <!-- 2) Capa de noche difusa -->
   <div class="night"></div>
 
-  <!-- contenedor de flores -->
+  <!-- 3) Markup completo de las flores amarillas -->
   <div class="flowers">
+
+    <!-- Flor 1 -->
     <div class="flower flower--1">
       <div class="flower__leafs flower__leafs--1">
         <div class="flower__leaf flower__leaf--1"></div>
@@ -46,6 +48,7 @@
       </div>
     </div>
 
+    <!-- Flor 2 -->
     <div class="flower flower--2">
       <div class="flower__leafs flower__leafs--2">
         <div class="flower__leaf flower__leaf--1"></div>
@@ -70,6 +73,7 @@
       </div>
     </div>
 
+    <!-- Flor 3 -->
     <div class="flower flower--3">
       <div class="flower__leafs flower__leafs--3">
         <div class="flower__leaf flower__leaf--1"></div>
@@ -93,81 +97,112 @@
         <div class="flower__line__leaf flower__line__leaf--4"></div>
       </div>
     </div>
+
+    <!-- Tallo largo -->
+    <div class="grow-ans" style="--d:1.2s">
+      <div class="flower__g-long">
+        <div class="flower__g-long__top"></div>
+        <div class="flower__g-long__bottom"></div>
+      </div>
+    </div>
+
+    <!-- Césped 1 -->
+    <div class="growing-grass">
+      <div class="flower__grass flower__grass--1">
+        <div class="flower__grass--top"></div>
+        <div class="flower__grass--bottom"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--5"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--6"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--7"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--8"></div>
+        <div class="flower__grass__overlay"></div>
+      </div>
+    </div>
+
+    <!-- Césped 2 -->
+    <div class="growing-grass">
+      <div class="flower__grass flower__grass--2">
+        <div class="flower__grass--top"></div>
+        <div class="flower__grass--bottom"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--5"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--6"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--7"></div>
+        <div class="flower__grass__leaf flower__grass__leaf--8"></div>
+        <div class="flower__grass__overlay"></div>
+      </div>
+    </div>
+
+    <!-- Ramas y hojas frontales -->
+    <div class="grow-ans" style="--d:2.4s">
+      <div class="flower__g-right flower__g-right--1"><div class="leaf"></div></div>
+    </div>
+    <div class="grow-ans" style="--d:2.8s">
+      <div class="flower__g-right flower__g-right--2"><div class="leaf"></div></div>
+    </div>
+    <div class="grow-ans" style="--d:2.8s">
+      <div class="flower__g-front">
+        <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--1"><div class="flower__g-front__leaf"></div></div>
+        <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--2"><div class="flower__g-front__leaf"></div></div>
+        <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--3"><div class="flower__g-front__leaf"></div></div>
+        <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--4"><div class="flower__g-front__leaf"></div></div>
+        <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--5"><div class="flower__g-front__leaf"></div></div>
+        <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--6"><div class="flower__g-front__leaf"></div></div>
+        <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--7"><div class="flower__g-front__leaf"></div></div>
+        <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--8"><div class="flower__g-front__leaf"></div></div>
+        <div class="flower__g-front__line"></div>
+      </div>
+    </div>
+    <div class="grow-ans" style="--d:3.2s">
+      <div class="flower__g-fr">
+        <div class="leaf"></div>
+        <div class="flower__g-fr__leaf flower__g-fr__leaf--1"></div>
+        <div class="flower__g-fr__leaf flower__g-fr__leaf--2"></div>
+        <div class="flower__g-fr__leaf flower__g-fr__leaf--3"></div>
+        <div class="flower__g-fr__leaf flower__g-fr__leaf--4"></div>
+        <div class="flower__g-fr__leaf flower__g-fr__leaf--5"></div>
+        <div class="flower__g-fr__leaf flower__g-fr__leaf--6"></div>
+        <div class="flower__g-fr__leaf flower__g-fr__leaf--7"></div>
+        <div class="flower__g-fr__leaf flower__g-fr__leaf--8"></div>
+      </div>
+    </div>
+
+    <!-- Hojas largas adicionales -->
+    <div class="long-g long-g--0">
+      <div class="grow-ans" style="--d:3s"><div class="leaf leaf--0"></div></div>
+      <div class="grow-ans" style="--d:2.2s"><div class="leaf leaf--1"></div></div>
+      <div class="grow-ans" style="--d:3.4s"><div class="leaf leaf--2"></div></div>
+      <div class="grow-ans" style="--d:3.6s"><div class="leaf leaf--3"></div></div>
+    </div>
+    <div class="long-g long-g--1">…</div>
+    <div class="long-g long-g--2">…</div>
+    <div class="long-g long-g--3">…</div>
+    <div class="long-g long-g--4">…</div>
+    <div class="long-g long-g--5">…</div>
+    <div class="long-g long-g--6">…</div>
+    <div class="long-g long-g--7">…</div>
   </div>
 
-  <!-- mensaje -->
-  <div class="love-message">
+  <!-- 4) Mensaje romántico -->
+  <div class="message">
     Mi niña hermosa, que la distancia no te haga olvidar lo mucho que te amo.
   </div>
 
-  <!-- botón y audio -->
+  <!-- 5) Botón y audio -->
   <button id="playMusic">🎵 Reproducir música</button>
   <audio id="bg-music" loop>
     <source src="music.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
   </audio>
 
-  <script>
-    // ~ estrellas
-    const canvas = document.getElementById('stars');
-    const ctx = canvas.getContext('2d');
-    let W, H;
-    function resize() {
-      W = canvas.width  = innerWidth;
-      H = canvas.height = innerHeight;
-    }
-    addEventListener('resize', resize);
-    resize();
-
-    const stars = Array.from({ length: 200 }, () => ({
-      x: Math.random()*W,
-      y: Math.random()*H,
-      r: Math.random()*1.5,
-      o: Math.random()
-    }));
-    function shootingStar() {
-      return { x:Math.random()*W, y:Math.random()*H/2,
-               len:Math.random()*80+40, speed:Math.random()*8+4,
-               life:0, maxLife:80 };
-    }
-    let meteors = [];
-    function draw() {
-      ctx.fillStyle = '#000';
-      ctx.fillRect(0,0,W,H);
-      ctx.fillStyle = '#fff';
-      stars.forEach(s => {
-        ctx.globalAlpha = s.o;
-        ctx.beginPath();
-        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-        ctx.fill();
-      });
-      ctx.globalAlpha = 1;
-      if (Math.random()<0.02) meteors.push(shootingStar());
-      meteors.forEach(m => {
-        ctx.strokeStyle='#fff'; ctx.lineWidth=2;
-        ctx.beginPath();
-        ctx.moveTo(m.x,m.y);
-        ctx.lineTo(m.x-m.len,m.y+m.len/2);
-        ctx.stroke();
-        m.x+=m.speed; m.y-=m.speed/2; m.life++;
-      });
-      meteors = meteors.filter(m=>m.life<m.maxLife);
-      requestAnimationFrame(draw);
-    }
-    draw();
-
-    // mensaje
-    const msg = document.querySelector('.love-message');
-    setTimeout(()=> msg.classList.add('show'), 6000);
-
-    // música
-    const music = document.getElementById('bg-music');
-    const btn   = document.getElementById('playMusic');
-    btn.style.display = 'none';
-    music.play().catch(()=> btn.style.display='block');
-    btn.addEventListener('click', ()=> {
-      music.play();
-      btn.style.display = 'none';
-    });
-  </script>
+  <!-- 6) JavaScript externo -->
+  <script src="script.js"></script>
 </body>
 </html>
