@@ -4,165 +4,135 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ramo para mi niña hermosa</title>
+
+  <!-- tu CSS -->
   <link rel="stylesheet" href="styles.css">
+
   <!-- Fuente Allura -->
   <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Fondo con estrellas -->
+  <!-- fondo de estrellas -->
   <canvas id="stars"></canvas>
 
-  <!-- Contenedor del ramo -->
+  <!-- ramo SVG -->
   <div class="bouquet">
-   <svg class="flowers" viewBox="0 0 600 600">
-  <!-- Tallos -->
-  <rect x="295" y="300" width="10" height="280" fill="#2e7d32" rx="5"/>
-  <rect x="275" y="320" width="10" height="260" fill="#2e7d32" rx="5"/>
-  <rect x="315" y="320" width="10" height="260" fill="#2e7d32" rx="5"/>
+    <svg class="flowers" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+      <!-- tallos -->
+      <rect x="295" y="300" width="10" height="280" fill="#2e7d32" rx="5"/>
+      <rect x="275" y="320" width="10" height="260" fill="#2e7d32" rx="5"/>
+      <rect x="315" y="320" width="10" height="260" fill="#2e7d32" rx="5"/>
 
-  <!-- Girasol -->
-  <g class="flower sunflower" transform="translate(300,220)">
-    <circle r="45" fill="#fbc02d"/>
-    <circle r="20" fill="#6d4c41"/>
-    <g>
-      <circle r="70" fill="none" stroke="#fdd835" stroke-width="24" stroke-dasharray="8 20"/>
-    </g>
-  </g>
+      <!-- girasol -->
+      <g class="flower sunflower" transform="translate(300 220)">
+        <circle r="45"  fill="#fbc02d"/>
+        <circle r="20"  fill="#6d4c41"/>
+        <circle r="70" fill="none" stroke="#fdd835" stroke-width="24" stroke-dasharray="8 20"/>
+      </g>
 
-  <!-- Tulipán izquierdo -->
-  <g class="flower tulip" transform="translate(230,260)">
-    <path d="M0 0 C-35 -80 -35 -160 0 -200 C35 -160 35 -80 0 0 Z" fill="#ffeb3b"/>
-  </g>
+      <!-- tulipanes -->
+      <g class="flower tulip" transform="translate(230 260)">
+        <path d="M0 0 C-35 -80 -35 -160 0 -200 C35 -160 35 -80 0 0 Z" fill="#ffeb3b"/>
+      </g>
+      <g class="flower tulip" transform="translate(370 260)">
+        <path d="M0 0 C-35 -80 -35 -160 0 -200 C35 -160 35 -80 0 0 Z" fill="#ffeb3b"/>
+      </g>
 
-  <!-- Tulipán derecho -->
-  <g class="flower tulip" transform="translate(370,260)">
-    <path d="M0 0 C-35 -80 -35 -160 0 -200 C35 -160 35 -80 0 0 Z" fill="#ffeb3b"/>
-  </g>
-
-  <!-- Rosa izquierda -->
-  <g class="flower rose" transform="translate(250,300)">
-    <circle r="35" fill="#ffd54f"/>
-    <circle r="25" fill="#fdd835"/>
-    <circle r="15" fill="#fbc02d"/>
-  </g>
-
-  <!-- Rosa derecha -->
-  <g class="flower rose" transform="translate(350,300)">
-    <circle r="35" fill="#ffd54f"/>
-    <circle r="25" fill="#fdd835"/>
-    <circle r="15" fill="#fbc02d"/>
-  </g>
-</svg>
+      <!-- rosas -->
+      <g class="flower rose" transform="translate(250 300)">
+        <circle r="35" fill="#ffd54f"/>
+        <circle r="25" fill="#fdd835"/>
+        <circle r="15" fill="#fbc02d"/>
+      </g>
+      <g class="flower rose" transform="translate(350 300)">
+        <circle r="35" fill="#ffd54f"/>
+        <circle r="25" fill="#fdd835"/>
+        <circle r="15" fill="#fbc02d"/>
+      </g>
+    </svg>
   </div>
 
-  <!-- Texto romántico -->
+  <!-- texto romántico -->
   <div class="love-text">
     Mi niña hermosa, que la distancia no te haga dudar de lo mucho que te amo.
   </div>
 
-  <!-- Botón para música (se muestra solo si autoplay falla) -->
-  <button id="playMusic" style="display:none;">🎵 Reproducir música</button>
+  <!-- botón de música si falla autoplay -->
+  <button id="playMusic">🎵 Reproducir música</button>
 
-  <!-- Música -->
+  <!-- audio loop -->
   <audio id="bg-music" loop>
     <source src="music.mp3" type="audio/mpeg">
     Tu navegador no soporta audio.
   </audio>
 
   <script>
-    // --- Fondo estrellas fugaces ---
+    // 1) fondo de estrellas
     const canvas = document.getElementById('stars');
     const ctx = canvas.getContext('2d');
-    let w,h;
-    function resize(){
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
+    let w, h;
+    function resize() { w = canvas.width = innerWidth; h = canvas.height = innerHeight; }
+    addEventListener('resize', resize);
     resize();
 
-    let stars = Array.from({length:200},()=>({
+    const stars = Array.from({ length: 200 }, () => ({
       x: Math.random()*w,
       y: Math.random()*h,
       r: Math.random()*1.5,
       o: Math.random()
     }));
-
-    function shootingStar(){
-      return {
-        x: Math.random()*w,
-        y: Math.random()*h/2,
-        len: Math.random()*80+40,
-        speed: Math.random()*8+4,
-        life: 0,
-        maxLife: 80
-      };
+    function shootingStar() {
+      return { x: Math.random()*w, y: Math.random()*h/2,
+               len: Math.random()*80+40,
+               speed: Math.random()*8+4,
+               life: 0, maxLife: 80 };
     }
     let meteors = [];
-
-    function draw(){
-      ctx.fillStyle = "#000";
-      ctx.fillRect(0,0,w,h);
-      ctx.fillStyle="#fff";
-      stars.forEach(s=>{
+    function draw() {
+      ctx.fillStyle = '#000'; ctx.fillRect(0,0,w,h);
+      ctx.fillStyle = '#fff';
+      stars.forEach(s => {
         ctx.globalAlpha = s.o;
         ctx.beginPath();
-        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.arc(s.x, s.y, s.r, 0, 2*Math.PI);
         ctx.fill();
       });
-      ctx.globalAlpha=1;
-      if(Math.random()<0.02) meteors.push(shootingStar());
-      meteors.forEach(m=>{
-        ctx.strokeStyle="#fff";
-        ctx.lineWidth=2;
+      ctx.globalAlpha = 1;
+      if (Math.random() < 0.02) meteors.push(shootingStar());
+      meteors.forEach(m => {
+        ctx.strokeStyle = '#fff'; ctx.lineWidth = 2;
         ctx.beginPath();
-        ctx.moveTo(m.x,m.y);
+        ctx.moveTo(m.x, m.y);
         ctx.lineTo(m.x-m.len, m.y+m.len/2);
         ctx.stroke();
-        m.x += m.speed;
-        m.y -= m.speed/2;
-        m.life++;
+        m.x += m.speed; m.y -= m.speed/2; m.life++;
       });
-      meteors = meteors.filter(m=>m.life<m.maxLife);
+      meteors = meteors.filter(m => m.life < m.maxLife);
       requestAnimationFrame(draw);
     }
     draw();
 
-    // --- Animación flores ---
-    document.querySelectorAll('.flower').forEach((f,i)=>{
-      f.style.opacity=0;
-      f.style.transform+=" scale(0)";
-      setTimeout(()=>{
-        f.style.transition="all 1.2s ease-out";
-        f.style.opacity=1;
-        f.style.transform=f.getAttribute("transform")+" scale(1)";
-        setTimeout(()=>f.classList.add("sway"),1500);
+    // 2) animar flores
+    document.querySelectorAll('.flower').forEach((f,i) => {
+      setTimeout(() => {
+        f.classList.add('bloom');
+        setTimeout(() => f.classList.add('sway'), 1500);
       }, 3000 + i*800);
     });
 
-    // --- Texto ---
-    const text=document.querySelector('.love-text');
-    setTimeout(()=>{
-      text.style.opacity=1;
-      text.style.transform="translateY(0)";
-    },6000);
+    // 3) mostrar texto
+    const text = document.querySelector('.love-text');
+    setTimeout(() => text.classList.add('show'), 6000);
 
-    // --- Música ---
-    const music=document.getElementById("bg-music");
-    const playBtn=document.getElementById("playMusic");
-
-    function tryPlay(){
-      music.play().catch(()=>{
-        playBtn.style.display="block";
-      });
-    }
-    tryPlay();
-
-    playBtn.addEventListener("click",()=>{
+    // 4) reproducir música o mostrar botón
+    const music = document.getElementById('bg-music');
+    const playBtn = document.getElementById('playMusic');
+    playBtn.style.display = 'none';
+    music.play().catch(() => playBtn.style.display = 'block');
+    playBtn.addEventListener('click', () => {
       music.play();
-      playBtn.style.display="none";
+      playBtn.style.display = 'none';
     });
   </script>
 </body>
 </html>
-
