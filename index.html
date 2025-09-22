@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ramo para mi niña hermosa</title>
 
-  <!-- CSS principal -->
+  <!-- tu CSS -->
   <link rel="stylesheet" href="styles.css">
 
-  <!-- Fuente Allura -->
+  <!-- Google Font Allura -->
   <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Lienzo de estrellas -->
+  <!-- lienzo para estrellas -->
   <canvas id="stars"></canvas>
 
-  <!-- Fondo nocturno -->
+  <!-- efecto de noche difuso -->
   <div class="night"></div>
 
-  <!-- Flores animadas -->
+  <!-- contenedor de flores -->
   <div class="flowers">
     <div class="flower flower--1">
       <div class="flower__leafs flower__leafs--1">
@@ -27,7 +27,6 @@
         <div class="flower__leaf flower__leaf--3"></div>
         <div class="flower__leaf flower__leaf--4"></div>
         <div class="flower__white-circle"></div>
-
         <div class="flower__light flower__light--1"></div>
         <div class="flower__light flower__light--2"></div>
         <div class="flower__light flower__light--3"></div>
@@ -54,7 +53,6 @@
         <div class="flower__leaf flower__leaf--3"></div>
         <div class="flower__leaf flower__leaf--4"></div>
         <div class="flower__white-circle"></div>
-
         <div class="flower__light flower__light--1"></div>
         <div class="flower__light flower__light--2"></div>
         <div class="flower__light flower__light--3"></div>
@@ -79,7 +77,6 @@
         <div class="flower__leaf flower__leaf--3"></div>
         <div class="flower__leaf flower__leaf--4"></div>
         <div class="flower__white-circle"></div>
-
         <div class="flower__light flower__light--1"></div>
         <div class="flower__light flower__light--2"></div>
         <div class="flower__light flower__light--3"></div>
@@ -96,98 +93,81 @@
         <div class="flower__line__leaf flower__line__leaf--4"></div>
       </div>
     </div>
-
-    <!-- Aquí puedes añadir grow-ans, grass y long-g según tu diseño -->
   </div>
 
-  <!-- Mensaje romántico -->
+  <!-- mensaje -->
   <div class="love-message">
     Mi niña hermosa, que la distancia no te haga olvidar lo mucho que te amo.
   </div>
 
-  <!-- Botón para música si falla el autoplay -->
+  <!-- botón y audio -->
   <button id="playMusic">🎵 Reproducir música</button>
-
-  <!-- Música de fondo -->
   <audio id="bg-music" loop>
     <source src="music.mp3" type="audio/mpeg">
-    Tu navegador no soporta audio.
   </audio>
 
   <script>
-    // lienzo de estrellas
+    // ~ estrellas
     const canvas = document.getElementById('stars');
     const ctx = canvas.getContext('2d');
-    let w, h;
+    let W, H;
     function resize() {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+      W = canvas.width  = innerWidth;
+      H = canvas.height = innerHeight;
     }
-    window.addEventListener('resize', resize);
+    addEventListener('resize', resize);
     resize();
+
     const stars = Array.from({ length: 200 }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      r: Math.random() * 1.5,
+      x: Math.random()*W,
+      y: Math.random()*H,
+      r: Math.random()*1.5,
       o: Math.random()
     }));
     function shootingStar() {
-      return {
-        x: Math.random() * w,
-        y: Math.random() * h / 2,
-        len: Math.random() * 80 + 40,
-        speed: Math.random() * 8 + 4,
-        life: 0,
-        maxLife: 80
-      };
+      return { x:Math.random()*W, y:Math.random()*H/2,
+               len:Math.random()*80+40, speed:Math.random()*8+4,
+               life:0, maxLife:80 };
     }
     let meteors = [];
     function draw() {
       ctx.fillStyle = '#000';
-      ctx.fillRect(0, 0, w, h);
+      ctx.fillRect(0,0,W,H);
       ctx.fillStyle = '#fff';
       stars.forEach(s => {
         ctx.globalAlpha = s.o;
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
         ctx.fill();
       });
       ctx.globalAlpha = 1;
-      if (Math.random() < 0.02) meteors.push(shootingStar());
+      if (Math.random()<0.02) meteors.push(shootingStar());
       meteors.forEach(m => {
-        ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 2;
+        ctx.strokeStyle='#fff'; ctx.lineWidth=2;
         ctx.beginPath();
-        ctx.moveTo(m.x, m.y);
-        ctx.lineTo(m.x - m.len, m.y + m.len / 2);
+        ctx.moveTo(m.x,m.y);
+        ctx.lineTo(m.x-m.len,m.y+m.len/2);
         ctx.stroke();
-        m.x += m.speed;
-        m.y -= m.speed / 2;
-        m.life++;
+        m.x+=m.speed; m.y-=m.speed/2; m.life++;
       });
-      meteors = meteors.filter(m => m.life < m.maxLife);
+      meteors = meteors.filter(m=>m.life<m.maxLife);
       requestAnimationFrame(draw);
     }
     draw();
 
-    // animar mensaje tras florecer
+    // mensaje
     const msg = document.querySelector('.love-message');
-    msg.style.opacity = 0;
-    msg.style.transform = 'translateY(20px)';
-    setTimeout(() => {
-      msg.classList.add('show');
-    }, 6000);
+    setTimeout(()=> msg.classList.add('show'), 6000);
 
-    // reproducir música o mostrar botón
+    // música
     const music = document.getElementById('bg-music');
-    const btn = document.getElementById('playMusic');
+    const btn   = document.getElementById('playMusic');
     btn.style.display = 'none';
-    music.play().catch(() => btn.style.display = 'block');
-    btn.addEventListener('click', () => {
+    music.play().catch(()=> btn.style.display='block');
+    btn.addEventListener('click', ()=> {
       music.play();
       btn.style.display = 'none';
     });
   </script>
 </body>
 </html>
-
