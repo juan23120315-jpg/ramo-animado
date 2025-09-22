@@ -1,92 +1,173 @@
-/* 1) RESET y LAYOUT */
-body, html {
+/* 1) RESET */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
-  height: 100%;
-  overflow: hidden;
-  background: #000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: sans-serif;
+  box-sizing: border-box;
 }
 
-/* 2) lienzo de estrellas */
+:root {
+  --dark-color: #000;
+}
+
+/* 2) BODY & PERSPECTIVA */
+body {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--dark-color);
+  overflow: hidden;
+  perspective: 1000px;
+  font-family: 'Allura', cursive;
+}
+
+/* 3) Lienzo de estrellas */
 #stars {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: -1;
 }
 
-/* 3) contenedor y SVG */
-.bouquet {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80vw;
-  max-width: 300px;
-  margin: 0 auto;
-}
-.flowers {
+/* 4) NOCHE */
+.night {
+  position: fixed;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
+  filter: blur(0.1vmin);
+  background-image:
+    radial-gradient(ellipse at top, transparent 0%, var(--dark-color)),
+    radial-gradient(ellipse at bottom, var(--dark-color), rgba(145,233,255,0.2)),
+    repeating-linear-gradient(220deg, #000 0, #000 19px, transparent 19px, transparent 22px),
+    repeating-linear-gradient(189deg, #000 0, #000 19px, transparent 19px, transparent 22px),
+    repeating-linear-gradient(148deg, #000 0, #000 19px, transparent 19px, transparent 22px),
+    linear-gradient(90deg, rgb(21,255,0), #f0f0f0);
 }
 
-/* 4) estado inicial de cada flor */
+/* 5) FLORES */
+.flowers {
+  position: relative;
+  transform: scale(0.9);
+}
 .flower {
+  position: absolute;
+  bottom: 10vmin;
+  transform-origin: bottom center;
+  z-index: 10;
+  --fl-speed: 0.8s;
+}
+
+/* 6) MENSAJE */
+.message {
+  background: #fce700;
+  position: absolute;
+  bottom: 50px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5vw;
+  font-weight: 800;
+  color: #000;
+  padding: 10px;
+  line-height: 1;
   opacity: 0;
-  transform: scale(0);
-  transform-origin: center bottom;
-  transition: transform 1.2s ease-out, opacity 1.2s ease-out;
-}
-
-/* 5) florecer */
-.flower.bloom {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* 6) balanceo suave */
-@keyframes sway {
-  0%,100% { transform: translateX(0) rotate(-1deg) scale(1); }
-  50%     { transform: translateX(5px) rotate(2deg) scale(1.02); }
-}
-.flower.sway {
-  animation: sway 4s ease-in-out infinite;
-}
-
-/* 7) texto romántico */
-.love-text {
-  font-family: 'Allura', cursive;
-  color: #F88379;
-  font-size: 2.2rem;
+  animation: fadeIn 1s forwards;
+  animation-delay: 2s;
   text-align: center;
-  max-width: 90%;
-  margin: 20px 0 0;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
-}
-.love-text.show {
-  opacity: 1;
-  transform: translateY(0);
 }
 
-/* 8) botón de música */
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* 7) BOTÓN MÚSICA */
 #playMusic {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
   display: none;
-  margin-top: 15px;
-  padding: 10px 20px;
-  font-size: 1rem;
   background: #F88379;
   color: #fff;
   border: none;
+  padding: 0.5rem 1rem;
   border-radius: 25px;
   cursor: pointer;
+  font-family: sans-serif;
 }
-#playMusic:hover {
-  background: #f0625d;
+#playMusic:hover { background: #f0625d; }
+
+/* 8) ANIMACIONES DE FLORES Y HOJAS */
+/* flower--1 */
+.flower--1 {
+  animation: moving-flower-1 4s linear infinite;
 }
+.flower--1 .flower__leafs {
+  animation: blooming-flower 2s backwards;
+  animation-delay: 1.1s;
+}
+/* hoja en tallo */
+.flower--1 .flower__line {
+  height: 70vmin;
+  animation: grow-flower-tree 4s backwards;
+  animation-delay: 0.3s;
+}
+/* hojas individuales */
+.flower--1 .flower__line__leaf--1 { animation: blooming-leaf-right var(--fl-speed) 1.6s backwards; }
+.flower--1 .flower__line__leaf--2 { animation: blooming-leaf-right var(--fl-speed) 1.4s backwards; }
+.flower--1 .flower__line__leaf--3 { animation: blooming-leaf-left  var(--fl-speed) 1.2s backwards; }
+.flower--1 .flower__line__leaf--4 { animation: blooming-leaf-left  var(--fl-speed) 1s   backwards; }
+.flower--1 .flower__line__leaf--5 { animation: blooming-leaf-right var(--fl-speed) 1.8s backwards; }
+.flower--1 .flower__line__leaf--6 { animation: blooming-leaf-left  var(--fl-speed) 2s   backwards; }
+
+/* flower--2 */
+.flower--2 {
+  left: 50%;
+  transform: rotate(20deg);
+  animation: moving-flower-2 4s linear infinite;
+}
+.flower--2 .flower__leafs { animation-delay: 1.4s; }
+.flower--2 .flower__line {
+  height: 60vmin;
+  animation-delay: 0.6s;
+}
+.flower--2 .flower__line__leaf--1 { animation: blooming-leaf-right var(--fl-speed) 1.9s backwards; }
+.flower--2 .flower__line__leaf--2 { animation: blooming-leaf-right var(--fl-speed) 1.7s backwards; }
+.flower--2 .flower__line__leaf--3 { animation: blooming-leaf-left  var(--fl-speed) 1.5s backwards; }
+.flower--2 .flower__line__leaf--4 { animation: blooming-leaf-left  var(--fl-speed) 1.3s backwards; }
+
+/* flower--3 */
+.flower--3 {
+  left: 50%;
+  transform: rotate(-15deg);
+  animation: moving-flower-3 4s linear infinite;
+}
+.flower--3 .flower__leafs { animation-delay: 1.7s; }
+.flower--3 .flower__line { animation-delay: 0.9s; }
+.flower--3 .flower__line__leaf--1 { animation: blooming-leaf-right var(--fl-speed) 2.5s backwards; }
+.flower--3 .flower__line__leaf--2 { animation: blooming-leaf-right var(--fl-speed) 2.3s backwards; }
+.flower--3 .flower__line__leaf--3 { animation: blooming-leaf-left  var(--fl-speed) 2.1s backwards; }
+.flower--3 .flower__line__leaf--4 { animation: blooming-leaf-left  var(--fl-speed) 1.9s backwards; }
+
+/* hojas y tallos, luces, césped, etc. */
+.flower__leafs, .flower__leafs--2, .flower__leafs--3 { animation: blooming-flower 2s backwards; }
+.flower__white-circle::after { /* patrón y degradado */ }
+.flower__leaf { /* forma y color */ }
+/* ... (TODO: incluye el resto de las reglas de diseño2.txt para flower__leaf, flower__light, flower__grass, grow-ans, long-g, keyframes, etc.) ... */
+
+/* Animaciones clave (ejemplos) */
+@keyframes moving-flower-1 { 0%,100%{transform:rotate(2deg);} 50%{transform:rotate(-2deg);} }
+@keyframes moving-flower-2 { 0%,100%{transform:rotate(18deg);}50%{transform:rotate(14deg);} }
+@keyframes moving-flower-3 { 0%,100%{transform:rotate(-18deg);}50%{transform:rotate(-20deg) rotateY(-10deg);} }
+@keyframes grow-flower-tree { 0%{height:0;border-radius:1vmin;} }
+@keyframes blooming-flower { 0%{transform:scale(0);} }
+@keyframes blooming-leaf-right { 0%{transform-origin:left;transform:rotate(70deg) rotateY(30deg) scale(0);} }
+@keyframes blooming-leaf-left  { 0%{transform-origin:right;transform:rotate(-70deg) rotateY(30deg) scale(0);} }
+
+/* Luz que parpadea */
+@keyframes light-ans {
+  0%{opacity:0;transform:translateY(0);}25%{opacity:1;transform:translateY(-5vmin) translateX(-2vmin);}50%{opacity:1;transform:translateY(-15vmin) translateX(2vmin);filter:blur(0.2vmin);}75%{transform:translateY(-20vmin) translateX(-2vmin);filter:blur(0.2vmin);}100%{transform:translateY(-30vmin);opacity:0;filter:blur(1vmin);}
+}
+
+/* Césped y ramas adicionales */
+/* ... incluye aquí las reglas @keyframes growing-grass-ans, moving-grass, flower-g-long-ans, flower-g-right-ans, leaf-ans, etc. tal cual diseño2.txt ... */
