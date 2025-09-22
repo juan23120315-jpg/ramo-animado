@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ramo para mi niña hermosa</title>
 
   <!-- CSS principal -->
@@ -15,10 +15,10 @@
   <!-- Lienzo de estrellas -->
   <canvas id="stars"></canvas>
 
-  <!-- Efecto de noche (para tu diseño) -->
+  <!-- Fondo nocturno -->
   <div class="night"></div>
 
-  <!-- Diseño de flores personalizado -->
+  <!-- Flores animadas -->
   <div class="flowers">
     <div class="flower flower--1">
       <div class="flower__leafs flower__leafs--1">
@@ -97,14 +97,15 @@
       </div>
     </div>
 
-    <!-- Resto de tu diseño de hierbas, tallos y hojas... -->
-
+    <!-- Aquí puedes añadir grow-ans, grass y long-g según tu diseño -->
   </div>
 
-  <!-- Mensaje final -->
-  <div class="message">Estas flores amarillas son para ti</div>
+  <!-- Mensaje romántico -->
+  <div class="love-message">
+    Mi niña hermosa, que la distancia no te haga olvidar lo mucho que te amo.
+  </div>
 
-  <!-- Botón para reproducir música si falla el autoplay -->
+  <!-- Botón para música si falla el autoplay -->
   <button id="playMusic">🎵 Reproducir música</button>
 
   <!-- Música de fondo -->
@@ -114,7 +115,7 @@
   </audio>
 
   <script>
-    // --- Lienzo de estrellas ---
+    // lienzo de estrellas
     const canvas = document.getElementById('stars');
     const ctx = canvas.getContext('2d');
     let w, h;
@@ -124,14 +125,12 @@
     }
     window.addEventListener('resize', resize);
     resize();
-
     const stars = Array.from({ length: 200 }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
       r: Math.random() * 1.5,
       o: Math.random()
     }));
-
     function shootingStar() {
       return {
         x: Math.random() * w,
@@ -143,7 +142,6 @@
       };
     }
     let meteors = [];
-
     function draw() {
       ctx.fillStyle = '#000';
       ctx.fillRect(0, 0, w, h);
@@ -172,41 +170,24 @@
     }
     draw();
 
-    // --- Animación de tus flores (usa la clase .flower) ---
-    document.querySelectorAll('.flower').forEach((f, i) => {
-      // inicia opacas y en pequeña escala
-      f.style.opacity = 0;
-      f.style.transform = 'scale(0)';
-      setTimeout(() => {
-        f.style.transition = 'transform 1.2s ease-out, opacity 1.2s ease-out';
-        f.style.opacity = 1;
-        f.style.transform = 'scale(1)';
-        // tras florecer, aplica sway
-        setTimeout(() => f.classList.add('sway'), 1500);
-      }, 3000 + i * 800);
-    });
-
-    // --- Mostrar mensaje al final ---
-    const msg = document.querySelector('.message');
+    // animar mensaje tras florecer
+    const msg = document.querySelector('.love-message');
     msg.style.opacity = 0;
     msg.style.transform = 'translateY(20px)';
     setTimeout(() => {
-      msg.style.transition = 'opacity 1.5s ease-out, transform 1.5s ease-out';
-      msg.style.opacity = 1;
-      msg.style.transform = 'translateY(0)';
+      msg.classList.add('show');
     }, 6000);
 
-    // --- Música ---
+    // reproducir música o mostrar botón
     const music = document.getElementById('bg-music');
-    const playBtn = document.getElementById('playMusic');
-    playBtn.style.display = 'none';
-    music.play().catch(() => {
-      playBtn.style.display = 'block';
-    });
-    playBtn.addEventListener('click', () => {
+    const btn = document.getElementById('playMusic');
+    btn.style.display = 'none';
+    music.play().catch(() => btn.style.display = 'block');
+    btn.addEventListener('click', () => {
       music.play();
-      playBtn.style.display = 'none';
+      btn.style.display = 'none';
     });
   </script>
 </body>
 </html>
+
