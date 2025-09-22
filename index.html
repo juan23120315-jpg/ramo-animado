@@ -5,130 +5,204 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ramo para mi niña hermosa</title>
 
-  <!-- tu CSS -->
+  <!-- CSS principal -->
   <link rel="stylesheet" href="styles.css">
 
   <!-- Fuente Allura -->
   <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- fondo de estrellas -->
+  <!-- Lienzo de estrellas -->
   <canvas id="stars"></canvas>
 
-  <!-- ramo SVG -->
-  <div class="bouquet">
-    <svg class="flowers" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-      <!-- tallos -->
-      <rect x="295" y="300" width="10" height="280" fill="#2e7d32" rx="5"/>
-      <rect x="275" y="320" width="10" height="260" fill="#2e7d32" rx="5"/>
-      <rect x="315" y="320" width="10" height="260" fill="#2e7d32" rx="5"/>
+  <!-- Efecto de noche (para tu diseño) -->
+  <div class="night"></div>
 
-      <!-- girasol -->
-      <g class="flower sunflower" transform="translate(300 220)">
-        <circle r="45"  fill="#fbc02d"/>
-        <circle r="20"  fill="#6d4c41"/>
-        <circle r="70" fill="none" stroke="#fdd835" stroke-width="24" stroke-dasharray="8 20"/>
-      </g>
+  <!-- Diseño de flores personalizado -->
+  <div class="flowers">
+    <div class="flower flower--1">
+      <div class="flower__leafs flower__leafs--1">
+        <div class="flower__leaf flower__leaf--1"></div>
+        <div class="flower__leaf flower__leaf--2"></div>
+        <div class="flower__leaf flower__leaf--3"></div>
+        <div class="flower__leaf flower__leaf--4"></div>
+        <div class="flower__white-circle"></div>
 
-      <!-- tulipanes -->
-      <g class="flower tulip" transform="translate(230 260)">
-        <path d="M0 0 C-35 -80 -35 -160 0 -200 C35 -160 35 -80 0 0 Z" fill="#ffeb3b"/>
-      </g>
-      <g class="flower tulip" transform="translate(370 260)">
-        <path d="M0 0 C-35 -80 -35 -160 0 -200 C35 -160 35 -80 0 0 Z" fill="#ffeb3b"/>
-      </g>
+        <div class="flower__light flower__light--1"></div>
+        <div class="flower__light flower__light--2"></div>
+        <div class="flower__light flower__light--3"></div>
+        <div class="flower__light flower__light--4"></div>
+        <div class="flower__light flower__light--5"></div>
+        <div class="flower__light flower__light--6"></div>
+        <div class="flower__light flower__light--7"></div>
+        <div class="flower__light flower__light--8"></div>
+      </div>
+      <div class="flower__line">
+        <div class="flower__line__leaf flower__line__leaf--1"></div>
+        <div class="flower__line__leaf flower__line__leaf--2"></div>
+        <div class="flower__line__leaf flower__line__leaf--3"></div>
+        <div class="flower__line__leaf flower__line__leaf--4"></div>
+        <div class="flower__line__leaf flower__line__leaf--5"></div>
+        <div class="flower__line__leaf flower__line__leaf--6"></div>
+      </div>
+    </div>
 
-      <!-- rosas -->
-      <g class="flower rose" transform="translate(250 300)">
-        <circle r="35" fill="#ffd54f"/>
-        <circle r="25" fill="#fdd835"/>
-        <circle r="15" fill="#fbc02d"/>
-      </g>
-      <g class="flower rose" transform="translate(350 300)">
-        <circle r="35" fill="#ffd54f"/>
-        <circle r="25" fill="#fdd835"/>
-        <circle r="15" fill="#fbc02d"/>
-      </g>
-    </svg>
+    <div class="flower flower--2">
+      <div class="flower__leafs flower__leafs--2">
+        <div class="flower__leaf flower__leaf--1"></div>
+        <div class="flower__leaf flower__leaf--2"></div>
+        <div class="flower__leaf flower__leaf--3"></div>
+        <div class="flower__leaf flower__leaf--4"></div>
+        <div class="flower__white-circle"></div>
+
+        <div class="flower__light flower__light--1"></div>
+        <div class="flower__light flower__light--2"></div>
+        <div class="flower__light flower__light--3"></div>
+        <div class="flower__light flower__light--4"></div>
+        <div class="flower__light flower__light--5"></div>
+        <div class="flower__light flower__light--6"></div>
+        <div class="flower__light flower__light--7"></div>
+        <div class="flower__light flower__light--8"></div>
+      </div>
+      <div class="flower__line">
+        <div class="flower__line__leaf flower__line__leaf--1"></div>
+        <div class="flower__line__leaf flower__line__leaf--2"></div>
+        <div class="flower__line__leaf flower__line__leaf--3"></div>
+        <div class="flower__line__leaf flower__line__leaf--4"></div>
+      </div>
+    </div>
+
+    <div class="flower flower--3">
+      <div class="flower__leafs flower__leafs--3">
+        <div class="flower__leaf flower__leaf--1"></div>
+        <div class="flower__leaf flower__leaf--2"></div>
+        <div class="flower__leaf flower__leaf--3"></div>
+        <div class="flower__leaf flower__leaf--4"></div>
+        <div class="flower__white-circle"></div>
+
+        <div class="flower__light flower__light--1"></div>
+        <div class="flower__light flower__light--2"></div>
+        <div class="flower__light flower__light--3"></div>
+        <div class="flower__light flower__light--4"></div>
+        <div class="flower__light flower__light--5"></div>
+        <div class="flower__light flower__light--6"></div>
+        <div class="flower__light flower__light--7"></div>
+        <div class="flower__light flower__light--8"></div>
+      </div>
+      <div class="flower__line">
+        <div class="flower__line__leaf flower__line__leaf--1"></div>
+        <div class="flower__line__leaf flower__line__leaf--2"></div>
+        <div class="flower__line__leaf flower__line__leaf--3"></div>
+        <div class="flower__line__leaf flower__line__leaf--4"></div>
+      </div>
+    </div>
+
+    <!-- Resto de tu diseño de hierbas, tallos y hojas... -->
+
   </div>
 
-  <!-- texto romántico -->
-  <div class="love-text">
-    Mi niña hermosa, que la distancia no te haga dudar de lo mucho que te amo.
-  </div>
+  <!-- Mensaje final -->
+  <div class="message">Estas flores amarillas son para ti</div>
 
-  <!-- botón de música si falla autoplay -->
+  <!-- Botón para reproducir música si falla el autoplay -->
   <button id="playMusic">🎵 Reproducir música</button>
 
-  <!-- audio loop -->
+  <!-- Música de fondo -->
   <audio id="bg-music" loop>
     <source src="music.mp3" type="audio/mpeg">
     Tu navegador no soporta audio.
   </audio>
 
   <script>
-    // 1) fondo de estrellas
+    // --- Lienzo de estrellas ---
     const canvas = document.getElementById('stars');
     const ctx = canvas.getContext('2d');
     let w, h;
-    function resize() { w = canvas.width = innerWidth; h = canvas.height = innerHeight; }
-    addEventListener('resize', resize);
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
     resize();
 
     const stars = Array.from({ length: 200 }, () => ({
-      x: Math.random()*w,
-      y: Math.random()*h,
-      r: Math.random()*1.5,
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 1.5,
       o: Math.random()
     }));
+
     function shootingStar() {
-      return { x: Math.random()*w, y: Math.random()*h/2,
-               len: Math.random()*80+40,
-               speed: Math.random()*8+4,
-               life: 0, maxLife: 80 };
+      return {
+        x: Math.random() * w,
+        y: Math.random() * h / 2,
+        len: Math.random() * 80 + 40,
+        speed: Math.random() * 8 + 4,
+        life: 0,
+        maxLife: 80
+      };
     }
     let meteors = [];
+
     function draw() {
-      ctx.fillStyle = '#000'; ctx.fillRect(0,0,w,h);
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, w, h);
       ctx.fillStyle = '#fff';
       stars.forEach(s => {
         ctx.globalAlpha = s.o;
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, 2*Math.PI);
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();
       });
       ctx.globalAlpha = 1;
       if (Math.random() < 0.02) meteors.push(shootingStar());
       meteors.forEach(m => {
-        ctx.strokeStyle = '#fff'; ctx.lineWidth = 2;
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.moveTo(m.x, m.y);
-        ctx.lineTo(m.x-m.len, m.y+m.len/2);
+        ctx.lineTo(m.x - m.len, m.y + m.len / 2);
         ctx.stroke();
-        m.x += m.speed; m.y -= m.speed/2; m.life++;
+        m.x += m.speed;
+        m.y -= m.speed / 2;
+        m.life++;
       });
       meteors = meteors.filter(m => m.life < m.maxLife);
       requestAnimationFrame(draw);
     }
     draw();
 
-    // 2) animar flores
-    document.querySelectorAll('.flower').forEach((f,i) => {
+    // --- Animación de tus flores (usa la clase .flower) ---
+    document.querySelectorAll('.flower').forEach((f, i) => {
+      // inicia opacas y en pequeña escala
+      f.style.opacity = 0;
+      f.style.transform = 'scale(0)';
       setTimeout(() => {
-        f.classList.add('bloom');
+        f.style.transition = 'transform 1.2s ease-out, opacity 1.2s ease-out';
+        f.style.opacity = 1;
+        f.style.transform = 'scale(1)';
+        // tras florecer, aplica sway
         setTimeout(() => f.classList.add('sway'), 1500);
-      }, 3000 + i*800);
+      }, 3000 + i * 800);
     });
 
-    // 3) mostrar texto
-    const text = document.querySelector('.love-text');
-    setTimeout(() => text.classList.add('show'), 6000);
+    // --- Mostrar mensaje al final ---
+    const msg = document.querySelector('.message');
+    msg.style.opacity = 0;
+    msg.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      msg.style.transition = 'opacity 1.5s ease-out, transform 1.5s ease-out';
+      msg.style.opacity = 1;
+      msg.style.transform = 'translateY(0)';
+    }, 6000);
 
-    // 4) reproducir música o mostrar botón
+    // --- Música ---
     const music = document.getElementById('bg-music');
     const playBtn = document.getElementById('playMusic');
     playBtn.style.display = 'none';
-    music.play().catch(() => playBtn.style.display = 'block');
+    music.play().catch(() => {
+      playBtn.style.display = 'block';
+    });
     playBtn.addEventListener('click', () => {
       music.play();
       playBtn.style.display = 'none';
