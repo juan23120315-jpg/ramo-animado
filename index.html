@@ -14,26 +14,30 @@
 
   <!-- Contenedor del ramo -->
   <div class="bouquet">
-    <svg class="flowers" viewBox="0 0 300 400">
-      <!-- Tallo común -->
-      <rect x="145" y="200" width="10" height="200" fill="#2e7d32" rx="5" />
+    <svg class="flowers" viewBox="0 0 400 500">
+      <!-- Tallo -->
+      <rect x="195" y="250" width="10" height="230" fill="#2e7d32" rx="5"/>
 
       <!-- Girasol -->
-      <g class="flower sunflower" transform="translate(150,180)">
-        <circle r="28" fill="#fbc02d" />
-        <circle r="12" fill="#6d4c41" />
+      <g class="flower sunflower" transform="translate(200,200)">
+        <circle r="35" fill="#fbc02d"/>
+        <circle r="15" fill="#6d4c41"/>
+        <g>
+          <!-- Pétalos -->
+          <circle r="50" fill="none" stroke="#fdd835" stroke-width="20" stroke-dasharray="6 20"/>
+        </g>
       </g>
 
       <!-- Tulipán amarillo -->
-      <g class="flower tulip" transform="translate(100,200)">
-        <path d="M0 0 C-15 -40 -15 -80 0 -100 C15 -80 15 -40 0 0 Z" fill="#ffeb3b"/>
+      <g class="flower tulip" transform="translate(140,250)">
+        <path d="M0 0 C-25 -60 -25 -120 0 -160 C25 -120 25 -60 0 0 Z" fill="#ffeb3b"/>
       </g>
 
       <!-- Rosa amarilla -->
-      <g class="flower rose" transform="translate(200,200)">
-        <circle r="20" fill="#ffd54f" />
-        <circle r="14" fill="#fdd835" />
-        <circle r="8" fill="#fbc02d" />
+      <g class="flower rose" transform="translate(260,250)">
+        <circle r="30" fill="#ffd54f"/>
+        <circle r="22" fill="#fdd835"/>
+        <circle r="14" fill="#fbc02d"/>
       </g>
     </svg>
   </div>
@@ -43,17 +47,20 @@
     Mi niña hermosa, que la distancia no te haga dudar de lo mucho que te amo.
   </div>
 
-  <!-- Música de fondo -->
-  <audio autoplay loop>
-    <source src="https://drive.google.com/uc?export=download&id=1cbmqn_G7oCI95i6YjfDz0xP8-z5ltbTZ" type="audio/mpeg">
+  <!-- Botón para música (se muestra solo si autoplay falla) -->
+  <button id="playMusic" style="display:none;">🎵 Reproducir música</button>
+
+  <!-- Música -->
+  <audio id="bg-music" loop>
+    <source src="music.mp3" type="audio/mpeg">
     Tu navegador no soporta audio.
   </audio>
 
   <script>
-    // --- Fondo de estrellas con fugaces ---
+    // --- Fondo estrellas fugaces ---
     const canvas = document.getElementById('stars');
     const ctx = canvas.getContext('2d');
-    let w, h;
+    let w,h;
     function resize(){
       w = canvas.width = window.innerWidth;
       h = canvas.height = window.innerHeight;
@@ -61,15 +68,13 @@
     window.addEventListener('resize', resize);
     resize();
 
-    // Estrellas normales
-    let stars = Array.from({length:200}, ()=>({
+    let stars = Array.from({length:200},()=>({
       x: Math.random()*w,
       y: Math.random()*h,
       r: Math.random()*1.5,
       o: Math.random()
     }));
 
-    // Estrella fugaz
     function shootingStar(){
       return {
         x: Math.random()*w,
@@ -85,9 +90,7 @@
     function draw(){
       ctx.fillStyle = "#000";
       ctx.fillRect(0,0,w,h);
-
-      // estrellas
-      ctx.fillStyle = "#fff";
+      ctx.fillStyle="#fff";
       stars.forEach(s=>{
         ctx.globalAlpha = s.o;
         ctx.beginPath();
@@ -95,49 +98,58 @@
         ctx.fill();
       });
       ctx.globalAlpha=1;
-
-      // fugaces
-      if(Math.random()<0.02){
-        meteors.push(shootingStar());
-      }
+      if(Math.random()<0.02) meteors.push(shootingStar());
       meteors.forEach(m=>{
-        ctx.strokeStyle = "#fff";
-        ctx.lineWidth = 2;
+        ctx.strokeStyle="#fff";
+        ctx.lineWidth=2;
         ctx.beginPath();
         ctx.moveTo(m.x,m.y);
-        ctx.lineTo(m.x - m.len, m.y + m.len/2);
+        ctx.lineTo(m.x-m.len, m.y+m.len/2);
         ctx.stroke();
         m.x += m.speed;
         m.y -= m.speed/2;
         m.life++;
       });
       meteors = meteors.filter(m=>m.life<m.maxLife);
-
       requestAnimationFrame(draw);
     }
     draw();
 
-    // --- Animación del ramo ---
+    // --- Animación flores ---
     document.querySelectorAll('.flower').forEach((f,i)=>{
-      f.style.opacity = 0;
-      f.style.transform += " scale(0)";
+      f.style.opacity=0;
+      f.style.transform+=" scale(0)";
       setTimeout(()=>{
-        f.style.transition = "all 1.2s ease-out";
-        f.style.opacity = 1;
-        f.style.transform = f.getAttribute("transform")+" scale(1)";
-        // después de florecer, añadir animación de balanceo
-        setTimeout(()=>{
-          f.classList.add("sway");
-        },1500);
-      }, 3000 + i*800); // aparece después del fondo
+        f.style.transition="all 1.2s ease-out";
+        f.style.opacity=1;
+        f.style.transform=f.getAttribute("transform")+" scale(1)";
+        setTimeout(()=>f.classList.add("sway"),1500);
+      }, 3000 + i*800);
     });
 
-    // --- Animación del texto ---
-    const text = document.querySelector('.love-text');
+    // --- Texto ---
+    const text=document.querySelector('.love-text');
     setTimeout(()=>{
       text.style.opacity=1;
       text.style.transform="translateY(0)";
-    }, 6000);
+    },6000);
+
+    // --- Música ---
+    const music=document.getElementById("bg-music");
+    const playBtn=document.getElementById("playMusic");
+
+    function tryPlay(){
+      music.play().catch(()=>{
+        playBtn.style.display="block";
+      });
+    }
+    tryPlay();
+
+    playBtn.addEventListener("click",()=>{
+      music.play();
+      playBtn.style.display="none";
+    });
   </script>
 </body>
 </html>
+
