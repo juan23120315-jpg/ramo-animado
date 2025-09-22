@@ -1,74 +1,92 @@
-body,html {
-  margin:0;
-  padding:0;
-  height:100%;
-  overflow:hidden;
-  background:#000;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+/* 1) RESET y LAYOUT */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
 }
 
+/* 2) lienzo de estrellas */
 #stars {
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:-1;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -1;
 }
 
-/* Ramo */
+/* 3) contenedor y SVG */
 .bouquet {
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:60vh;
-}
-
-.flowers {
-  width: 420px;
-  height: 520px;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+  max-width: 300px;
   margin: 0 auto;
-  position: relative;
-  top: 50%;
-  transform: translateY(-10%);
+}
+.flowers {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
+/* 4) estado inicial de cada flor */
+.flower {
+  opacity: 0;
+  transform: scale(0);
+  transform-origin: center bottom;
+  transition: transform 1.2s ease-out, opacity 1.2s ease-out;
+}
+
+/* 5) florecer */
+.flower.bloom {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 6) balanceo suave */
 @keyframes sway {
-  0%   { transform:translateY(0) scale(1) rotate(-1deg);}
-  50%  { transform:translateY(-2px) scale(1.02) rotate(2deg);}
-  100% { transform:translateY(0) scale(1) rotate(-1deg);}
+  0%,100% { transform: translateX(0) rotate(-1deg) scale(1); }
+  50%     { transform: translateX(5px) rotate(2deg) scale(1.02); }
 }
 .flower.sway {
-  animation:sway 4s ease-in-out infinite;
+  animation: sway 4s ease-in-out infinite;
 }
 
-/* Texto */
+/* 7) texto romántico */
 .love-text {
-  font-family:'Allura', cursive;
-  font-size:2.2rem;
-  color:#F88379;
-  text-align:center;
-  max-width:90%;
-  margin-top:20px;
-  opacity:0;
-  transform:translateY(20px);
-  transition:all 2s ease;
+  font-family: 'Allura', cursive;
+  color: #F88379;
+  font-size: 2.2rem;
+  text-align: center;
+  max-width: 90%;
+  margin: 20px 0 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+.love-text.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Botón música */
+/* 8) botón de música */
 #playMusic {
-  margin-top:15px;
-  padding:10px 20px;
-  font-size:1rem;
-  background:#F88379;
-  color:#fff;
-  border:none;
-  border-radius:25px;
-  cursor:pointer;
-  font-family:sans-serif;
+  display: none;
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background: #F88379;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
 }
 #playMusic:hover {
-  background:#f0625d;
+  background: #f0625d;
 }
